@@ -141,12 +141,12 @@ class OrderFact(BaseModel):
     customer = pw.ForeignKeyField(CustomerDim, backref='order_details')
     employee = pw.ForeignKeyField(EmployeeDim, backref='order_details')
     date = pw.ForeignKeyField(DateDim, backref='order_facts')
+    final_price = pw.FloatField()
 
 class StockFact(BaseModel):
     date = pw.ForeignKeyField(DateDim, backref='stocks')
     product = pw.ForeignKeyField(ProductDim, backref='stocks')
     stock = pw.IntegerField()
-
 
 class ProductOrder(BaseModel):
     product = pw.ForeignKeyField(ProductDim, backref='product_orders')
@@ -154,6 +154,7 @@ class ProductOrder(BaseModel):
     quantity = pw.IntegerField()
     discount = pw.FloatField()
     order = pw.ForeignKeyField(OrderFact, backref='product_orders')
+    final_price = pw.FloatField()
 
 
 class ShippingOrderFact(BaseModel):
