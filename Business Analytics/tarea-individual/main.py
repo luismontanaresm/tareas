@@ -157,7 +157,8 @@ def load_orders(orders_df: pd.DataFrame):
             customer=customer,
             employee=employee,
             date=order_date,
-            final_price=0)
+            final_price=0,
+            final_discount=0)
         new_orders.append(order_fact)
 
         shipping_address = models.ShippingAddressDim.create(
@@ -206,6 +207,7 @@ def load_product_orders(product_order_df: pd.DataFrame):
 
         order_fact = models.OrderFact.get(models.OrderFact.order_id == row['OrderID'])
         order_fact.final_price += new_product_order.final_price # <-- Update order pricing
+        order_fact.final_discount += new_product_order.discount
         order_fact.save()
     return new_product_orders
 

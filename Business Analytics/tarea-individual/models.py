@@ -142,6 +142,7 @@ class OrderFact(BaseModel):
     employee = pw.ForeignKeyField(EmployeeDim, backref='order_details')
     date = pw.ForeignKeyField(DateDim, backref='order_facts')
     final_price = pw.FloatField()
+    final_discount = pw.FloatField()
 
 class StockFact(BaseModel):
     date = pw.ForeignKeyField(DateDim, backref='stocks')
